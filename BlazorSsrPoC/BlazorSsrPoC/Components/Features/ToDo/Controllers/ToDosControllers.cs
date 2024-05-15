@@ -17,7 +17,6 @@ public class ToDosControllers : Controller {
     public async Task<List<ToDoDto>> GetToDos() {
         return await _db.Todos
             .Select(e => e.ToDto())
-            .OrderByDescending(t => t.Title)
             .ToListAsync();
     }
 }

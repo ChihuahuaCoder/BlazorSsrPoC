@@ -1,12 +1,14 @@
-﻿namespace BlazorSsrPoC.Components.Features.ToDo.Models;
+﻿using Microsoft.AspNetCore.Components;
+
+namespace BlazorSsrPoC.Components.Features.ToDo.Models;
 
 public class ToDoService {
-    public Task<ICollection<ToDoDto>> GetTodoAsync() {
-        var result = new List<ToDoDto> {
-            new() { Title = "Blazor" },
-            new() { Title = "Yoga" },
-            new() { Title = "Progresownik" }
-        };
-        return Task.FromResult<ICollection<ToDoDto>>(result);
+    private readonly HttpClient _client;
+
+    public ToDoService(HttpClient client) {
+        _client = client;
+    }
+    public async Task<ICollection<ToDoDto>?> GetTodoAsync() {
+        return await _client.GetFromJsonAsync<List<ToDoDto>>( "http://localhost:5254/todos");
     }
 }

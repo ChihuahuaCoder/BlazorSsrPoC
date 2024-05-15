@@ -2,21 +2,28 @@
 @rendermode InteractiveServer
 @using BlazorSsrPoC.Components.Features.ToDo
 @using BlazorSsrPoC.Components.Features.ToDo.Models
+@using BlazorSsrPoC.Components.Features.ToDo.Views
 @inject ToDoService ToDoService
 
 <PageTitle>To do list</PageTitle>
-<h3>Todo @_todos.Count(todo => !todo.IsDone)</h3>
-<div class="container">
-    @foreach (var item in _todos) {
-        <ToDoItem Item="@item"/>
-    }
-</div>
+@if (_todos.Count == 0) {
+    <span>Loading...</span>
+}
+else {
+    <h3>Todo @_todos.Count(todo => !todo.IsDone)</h3>
+    <div class="container">
+        @foreach (var item in _todos) {
+            <ToDoItem Item="@item"/>
+        }
+    </div>
+}
+
 <input @bind="newTodo"/>
 <button @onclick="AddTodo">Add todo</button>
 
 @code {
     string newTodo = "";
-    ICollection<ToDoDto> _todos = new List<ToDoDto>();
+    ICollection<ToDoDto>? _todos = new List<ToDoDto>();
 
     protected override async Task OnInitializedAsync() {
         _todos = await ToDoService.GetTodoAsync();
