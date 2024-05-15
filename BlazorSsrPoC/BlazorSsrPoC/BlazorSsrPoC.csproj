@@ -10,7 +10,8 @@
         <Watch Include="**\*.scss" />
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="AspNetCore.SassCompiler" Version="1.77.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.5" />
+      <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
     </ItemGroup>
 </Project>

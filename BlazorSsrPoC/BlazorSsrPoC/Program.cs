@@ -1,5 +1,6 @@
 using BlazorSsrPoC.Components;
 using BlazorSsrPoC.Components.Features.ToDo;
+using BlazorSsrPoC.Components.Features.ToDo.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

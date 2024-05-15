@@ -1,7 +1,7 @@
 ﻿@page "/todo"
 @rendermode InteractiveServer
-@using System.Collections
 @using BlazorSsrPoC.Components.Features.ToDo
+@using BlazorSsrPoC.Components.Features.ToDo.Models
 @inject ToDoService ToDoService
 
 <PageTitle>To do list</PageTitle>
@@ -16,7 +16,7 @@
 
 @code {
     string newTodo = "";
-    ICollection<ToDoElement> _todos = new List<ToDoElement>();
+    ICollection<ToDoDto> _todos = new List<ToDoDto>();
 
     protected override async Task OnInitializedAsync() {
         _todos = await ToDoService.GetTodoAsync();
@@ -24,7 +24,7 @@
 
     private void AddTodo() {
         if (!string.IsNullOrWhiteSpace(newTodo)) {
-            _todos.Add(new ToDoElement {
+            _todos.Add(new ToDoDto {
                 Title = newTodo
             });
             newTodo = String.Empty;
