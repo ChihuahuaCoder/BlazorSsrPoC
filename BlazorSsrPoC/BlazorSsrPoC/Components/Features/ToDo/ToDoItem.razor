@@ -1,0 +1,11 @@
+﻿@rendermode InteractiveServer
+
+<div class="to-do-item_container">
+    <input type="checkbox" @bind="Item.IsDone"/>
+    <span>@Item.Title</span>
+</div>
+
+@code {
+    [Parameter, EditorRequired] 
+    public required ToDoElement Item { get; set; }
+}

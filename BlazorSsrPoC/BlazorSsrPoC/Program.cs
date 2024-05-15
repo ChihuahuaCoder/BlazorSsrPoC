@@ -1,10 +1,12 @@
 using BlazorSsrPoC.Components;
+using BlazorSsrPoC.Components.Features.ToDo;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddSingleton<ToDoService>();
 
 var app = builder.Build();
 

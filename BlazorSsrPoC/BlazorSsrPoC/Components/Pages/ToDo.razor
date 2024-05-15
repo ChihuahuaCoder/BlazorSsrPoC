@@ -1,0 +1,34 @@
+﻿@page "/todo"
+@rendermode InteractiveServer
+@using System.Collections
+@using BlazorSsrPoC.Components.Features.ToDo
+@inject ToDoService ToDoService
+
+<PageTitle>To do list</PageTitle>
+<h3>Todo @_todos.Count(todo => !todo.IsDone)</h3>
+<div class="container">
+    @foreach (var item in _todos) {
+        <ToDoItem Item="@item"/>
+    }
+</div>
+<input @bind="newTodo"/>
+<button @onclick="AddTodo">Add todo</button>
+
+@code {
+    string newTodo = "";
+    ICollection<ToDoElement> _todos = new List<ToDoElement>();
+
+    protected override async Task OnInitializedAsync() {
+        _todos = await ToDoService.GetTodoAsync();
+    }
+
+    private void AddTodo() {
+        if (!string.IsNullOrWhiteSpace(newTodo)) {
+            _todos.Add(new ToDoElement {
+                Title = newTodo
+            });
+            newTodo = String.Empty;
+        }
+    }
+
+}
