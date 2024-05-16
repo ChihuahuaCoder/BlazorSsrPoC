@@ -2,5 +2,5 @@
 
 public class ToDoDto {
     public string? Title { get; set; }
-    public bool IsDone { get; set; } = false;
+    public bool IsCompleted { get; set; }
 }

@@ -8,17 +8,17 @@ public static class ToDoSeeder {
             new() {
                 Id = Guid.NewGuid(),
                 Title = "Blazor",
-                IsDone = false
+                IsCompleted = false
             },
             new() {
                 Id = Guid.NewGuid(),
                 Title = "Yoga",
-                IsDone = false
+                IsCompleted = false
             },
             new() {
                 Id = Guid.NewGuid(),
                 Title = "Progresownik",
-                IsDone = false
+                IsCompleted = false
             }
         };
         

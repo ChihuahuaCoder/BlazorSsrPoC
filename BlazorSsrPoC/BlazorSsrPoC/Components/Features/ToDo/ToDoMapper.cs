@@ -6,7 +6,7 @@ public static class ToDoMapper {
     public static ToDoDto ToDto(this ToDoEntity entity) {
         return new ToDoDto {
             Title = entity.Title,
-            IsDone = entity.IsDone
+            IsCompleted = entity.IsCompleted
         };
     }
 }

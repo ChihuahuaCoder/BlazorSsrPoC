@@ -16,6 +16,7 @@ public class ToDosControllers : Controller {
     [HttpGet]
     public async Task<List<ToDoDto>> GetToDos() {
         return await _db.Todos
+            .AsNoTracking()
             .Select(e => e.ToDto())
             .ToListAsync();
     }

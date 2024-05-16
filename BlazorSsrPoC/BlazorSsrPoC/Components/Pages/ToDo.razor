@@ -1,5 +1,6 @@
 ﻿@page "/todo"
 @rendermode InteractiveServer
+@using System.Text.Json
 @using BlazorSsrPoC.Components.Features.ToDo
 @using BlazorSsrPoC.Components.Features.ToDo.Models
 @using BlazorSsrPoC.Components.Features.ToDo.Views
@@ -10,10 +11,10 @@
     <span>Loading...</span>
 }
 else {
-    <h3>Todo @_todos.Count(todo => !todo.IsDone)</h3>
+    <h3>Todo @_todos.Count(x => !x.IsCompleted)</h3>
     <div class="container">
         @foreach (var item in _todos) {
-            <ToDoItem Item="@item"/>
+            <ToDoItem Item="@item" OnChangeCallback="@(isChecked => item.IsCompleted = isChecked)"/>
         }
     </div>
 }
@@ -28,7 +29,7 @@ else {
     protected override async Task OnInitializedAsync() {
         _todos = await ToDoService.GetTodoAsync();
     }
-
+    
     private void AddTodo() {
         if (!string.IsNullOrWhiteSpace(newTodo)) {
             _todos.Add(new ToDoDto {
@@ -37,5 +38,4 @@ else {
             newTodo = String.Empty;
         }
     }
-
 }

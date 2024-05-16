@@ -1,11 +1,18 @@
 ﻿@rendermode InteractiveServer
 
 <div class="to-do-item_container">
-    <input type="checkbox" @bind="Item.IsDone"/>
+    @* <input type="checkbox" @bind-value="Item.IsCompleted"/> *@
+    <input type="checkbox" checked="@Item.IsCompleted"  @onchange="e => HandleChange((bool) e.Value)"/>
     <span>@Item.Title</span>
 </div>
 
 @code {
     [Parameter, EditorRequired] 
     public required ToDoDto Item { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnChangeCallback { get; set; }
+
+    private async Task HandleChange(bool newValue) {
+        await OnChangeCallback.InvokeAsync(newValue);
+    }
 }
